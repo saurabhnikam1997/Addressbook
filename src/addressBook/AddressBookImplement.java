@@ -1,6 +1,7 @@
 package addressBook;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 class AddressBookImplement implements AddressBookInterface  {
@@ -29,7 +30,7 @@ class AddressBookImplement implements AddressBookInterface  {
 
 	@Override
 	public void editPerson() {
-		 int cond=1;
+		int cond=1;
 		System.out.println("Enter FirstName to update details");
 		String name = sc.nextLine();
 		
@@ -89,42 +90,68 @@ class AddressBookImplement implements AddressBookInterface  {
 	public void deletePerson() {
 		System.out.println("Enter firstName to delete its Record");
 		String name = sc.nextLine();
-		boolean isfound = false;
+		
 		for (int i=0; i<personInfo.size(); i++) {
 			String personName = personInfo.get(i).firstName;
 			if (name.equals(personName)) {
-				isfound = true;
+				
 				personInfo.remove(i);
 				System.out.println("Record Deleted");
 				
 			}
-		}
-			if (isfound == false) {
-				System.out.println("Not found");
+			else {
+				System.out.println("Name Not found");
 			}
 	}
-
+}
 	@Override
 	public void sortByName() {
-		// TODO Auto-generated method stub
+		Collections.sort(personInfo, new NameComparator());
+		System.out.println("Sorted by Name");
+		for (Person p : personInfo) 
+			System.out.println(p.toString());
+		
 		
 	}
 
 	@Override
 	public void sortByZip() {
-		// TODO Auto-generated method stub
+		Collections.sort(personInfo, new ZipComparator());
+		System.out.println("Sorted by Zipcode:\n");
+		for (Person p : personInfo) 
+			System.out.println(p.toString());
 		
 	}
 
 	@Override
 	public void searchPerson() {
-		// TODO Auto-generated method stub
-		
+		sc = new Scanner(System.in);
+		System.out.println("Enter firstname to search the details");
+		String name = sc.nextLine();
+		for (Person person : personInfo) {
+			if(name.equals(person.firstName)) {
+				System.out.println(person.toString());
+			}
+		 else {
+			System.out.println("Name not found");
+		 }
+		}
 	}
 
 	@Override
 	public void searchPhoneNumber() {
-		// TODO Auto-generated method stub
+		sc = new Scanner(System.in);
+		System.out.println("Enter phonenumber to search the details");
+		String phone = sc.nextLine();
+		for (Person person : personInfo) {
+			if(phone.equals(person.phoneNumber)) {
+				System.out.println(person.toString());
+			}	
+			else {
+			System.out.println("Phonenumber not found");
+			}
+		}
+		
 		
 	}
 

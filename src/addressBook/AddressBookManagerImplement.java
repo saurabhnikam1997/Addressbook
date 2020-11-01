@@ -1,25 +1,24 @@
 package addressBook;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.FilenameFilter;
-import java.io.IOException;
-import java.util.Scanner;
+import java.util.*;
+import java.io.*;
+
 
 public class AddressBookManagerImplement implements AddressBookManagerInterface {
 	Scanner n = new Scanner(System.in);
 	private Scanner input;
 	String cap;
+	private File file;
 	
-	private static final CharSequence CSV_HEADER = null;
+	private static final String CSV_HEADER = "firstName,lastName,phoneNumber,city,state,zip";
 	
 
 	public void newAddressBook() {
 			System.out.println("Enter Name of new AddressBook");
-			String nam = n.nextLine();
+			String name1 = n.nextLine();
 			
 			try {
-					File obj = new File("C:\\Users\\nikam\\Desktop" +nam+ ".csv");
+					File obj = new File(name1+ ".csv");
 					if (obj.createNewFile()) {
 						System.out.println("New Addressbook Created: " + obj.getName());
 					}
@@ -50,8 +49,7 @@ public class AddressBookManagerImplement implements AddressBookManagerInterface 
 		System.out.println("Enter the AddressBook to Open: ");
 		cap = n.nextLine();
 		boolean filefound = false;
-		for (File file :files) {
-			if (file.getName().equals(cap)) {
+			if(file.getName().equals(cap)) {
 		
 				int cond=1; filefound = true;
 				while (cond == 1) {
@@ -111,8 +109,7 @@ public class AddressBookManagerImplement implements AddressBookManagerInterface 
 			}
 				}
 			}
-			
-		}
+		
 		if (filefound == false)
 			System.out.println("AddressBook Not found ");
 	}

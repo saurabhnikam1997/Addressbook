@@ -9,7 +9,7 @@ public class Person {
 		private String lastName;
 		private String city;
 		private String state;
-		private String phoneNumber;
+		String phoneNumber;
 		String zip;
 		
 		public Person() {
